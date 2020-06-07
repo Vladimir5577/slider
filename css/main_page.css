@@ -1,0 +1,251 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+}
+
+/*#### Global ###################################################*/
+
+.container {
+	width: 80%;
+	margin: auto;
+	overflow: hidden;
+}
+
+header {
+	background-color: blue;
+	color: white;
+	padding-top: 30px;
+	min-height: 70px;
+	border-bottom: 3px solid #FF0040;
+}
+
+header h1 {
+	float: left;
+
+}
+
+header li {
+	float: left;
+	display: inline;
+	padding: 0 20px 0 20px;
+}
+
+header a {
+	color: white;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+header a:hover {
+	font-size: 22px;
+	border: 2px solid red;
+	background-color: #04B4AE;
+}
+
+header nav {
+	float: right;
+	margin-top: 10px;
+}
+
+/*###### Show case ###########################################################*/
+
+#showcase {
+	min-height: 400px;
+	background: url("../includes/1.jpg");
+	background-color: rgba(30, 100, 100, 0.7);
+	background-blend-mode: multiply;
+}
+
+#showcase h1 {
+	margin-top: 80px;
+	color: white;
+	font-size: 55px;
+}
+
+#showcase p {
+	color: white;
+	width: 40%;
+	font-size: 24px;
+}
+
+.btn_container {
+	margin -top: 15px;
+	padding: 10px;
+	height: 40px;
+}
+
+.about_btn {
+	color: white;
+	font-size: 25px;
+	padding: 5px 30px;
+	text-decoration: none;
+	border: 3px solid red;
+	border-radius: 30px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	background-color: #0000FF;
+
+}
+
+.contact_btn {
+	color: white;
+	font-size: 25px;
+	padding: 5px 30px;
+	text-decoration: none;
+	border: 3px solid red;
+	border-radius: 30px;
+	margin-bottom: 20px;
+	background-color: #0000FF;
+}
+
+.about_btn:hover {
+	background-color: #2EFE2E;
+}
+
+.contact_btn:hover {
+	background-color: #2EFE2E;
+}
+
+/*###### Subscribe ###########################################################*/
+
+#subscribe {
+	width: 100%;
+	min-height: 70px;
+	background-color: blue;
+}
+
+#subscribe h2 {
+	color: white;
+	float: left;
+	margin-top: 20px;
+}
+
+#subscribe form {
+	float: right;
+	margin-top: 20px;
+}
+
+#subscribe input {
+	height: 25px;
+}
+
+#subscribe button {
+	font-size: 20px;
+}
+
+/*###### Boxes ###########################################################*/
+
+#boxes {
+	margin-top: 20px;
+}
+
+#boxes .box {
+	width: 30%;
+	float: left;
+	text-align: center;
+	padding: 10px;
+}
+
+#boxes .box:hover {
+	background-color: #A9A9F5;
+
+}
+
+.box img {
+	height: 200px;
+}
+
+.box h1 {
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+
+/*###### For media ###########################################################*/
+
+footer {
+	width: 100%;
+	height: 70px;
+	background-color: blue;
+	margin-top: 20px;
+}
+
+footer h1 {
+	color: white;
+	text-align: center;
+	padding-top: 15px;
+}
+
+
+
+
+
+/*###### For media ###########################################################*/
+
+@media(max-width: 768px) {
+	.container,
+	header h1,
+	header nav,
+	header li
+	 {
+		width: 100%;
+		float: none;
+		text-align: center;
+		padding: 5px;
+	}
+
+	/*### Show Case ##############*/
+
+
+	#showcase {
+		min-height: 300px;
+	}
+
+	#showcase h1 {
+		margin-top: 50px;
+		font-size: 45px;
+		text-align: center;
+	}
+
+	#showcase p {
+		width: 90%;
+		padding: 30px 20px;
+
+	}
+
+	/*## Subscribe #########*/
+
+	#subscribe {
+		width: 100%;
+		padding: 5px;
+	}
+
+	#subscribe h2 {
+		text-align: center;
+		float: none;
+	}
+
+	#subscribe form {
+		text-align: center;
+		float: none;
+	}
+
+	/*## Boxes #########*/
+
+	#boxes .box {
+		float: none;
+		width: 100%;
+		border: 2px solid green;
+		padding: 10px;
+		margin: 20px auto;
+
+	}
+
+	#boxes .box p {
+		width: 80%;
+		
+
+	}
+
+}
