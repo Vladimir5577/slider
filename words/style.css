@@ -1,0 +1,7 @@
+body {
+	background-color: grey;
+}
+
+.hide_content {
+	opacity: 0;
+}

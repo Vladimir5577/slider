@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Learn words</title>
+		<!-- Change href if need additional bootstrap href="style_bootstrap.css" -->
+		<link rel="stylesheet" type="text/css" href="style_bootstrap_pure.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="./data.js"></script>
+	</head>
+	<body> 
+
+		<div id="container" class="container">
+			<h1 class="table">Learn Words</h1>
+		
+		</div>
+
+		<script>
+       
+	        // Get the container element where the table will be inserted
+	        let container = document.getElementById("container");
+	         
+	        // Create the table element
+	        let table = document.createElement("table");
+	        table.setAttribute('class', 'table table-bordered table-dark');
+	         
+	        // Get the keys (column names) of the first object in the JSON data
+	        let cols = Object.keys(jsonData[0]);
+
+	        let i = 1;
+	         
+	        // Create the header element
+	        let thead = document.createElement("thead");
+	        let tbody = document.createElement("tbody");
+	        let tr = document.createElement("tr");
+	         
+	        // Loop through the column names and create header cells
+	        cols.forEach((item) => {
+	            let th = document.createElement("th");
+	            th.setAttribute('scope', 'col');
+	            th.innerText = item; // Set the column name as the text of the header cell
+	            tr.appendChild(th); // Append the header cell to the header row
+	        });
+
+	        thead.appendChild(tr); // Append the header row to the header
+	        table.append(thead) // Append the header to the table
+	         
+	         // Loop through the JSON data and create table rows
+	        jsonData.forEach((item) => {
+	            let tr = document.createElement("tr");
+	            
+	            // Get the values of the current object in the JSON data
+	            let vals = Object.values(item);
+
+	            let thr = document.createElement("th");
+	            thr.setAttribute('scope', 'row');
+	        	thr.innerText = vals[0]; // Set the value as the text of the table cell
+	        	tr.appendChild(thr); // Append the table cell to the table row
+
+
+	        	let td1 = document.createElement("td");
+	        	td1.innerText = vals[1]; // Set the value as the text of the table cell
+	        	tr.appendChild(td1); // Append the table cell to the table row
+
+	        	let number = i++;
+	           	let td2 = document.createElement("td");
+	           	td2.setAttribute('class', 'hide_content');
+	           	td2.setAttribute('id', 'hide_' + number);
+	           	td2.setAttribute('onclick', 'showHide(' + number + ')');
+	        	td2.innerText = vals[2]; // Set the value as the text of the table cell
+	           	tr.appendChild(td2); // Append the table cell to the table row
+	 
+	            tbody.appendChild(tr);
+	            table.appendChild(tbody); // Append the table row to the table
+	        });
+	        
+	        container.appendChild(table) // Append the table to the container element
+	      	
+	      	function showHide(n) {
+
+	      		let element = document.getElementById('hide_' + n);
+	      		let classExist = element.classList.contains('hide_content');
+
+	      		if (classExist) {
+		      		element.classList.remove('hide_content');
+	      		} else {
+	      			element.classList.add('hide_content');
+	      		}
+	      		
+	      	}
+	   	</script>
+	</body>
+</html>
