@@ -1,4 +1,4 @@
-var jsonData =  [
+var data_1 =  [
 
 {
    N: 1,
@@ -81,6 +81,10 @@ var jsonData =  [
    Word: "extort",
    Translation: "вымогать"
 },{
+    N: "",
+    Word: "exempt",
+    Translation: "освободать, пользоваться льготами",
+},{
    N: 18,
    Word: "content",
    Translation: "содержание",
@@ -112,6 +116,10 @@ var jsonData =  [
    N: "",
    Word: "treat",
    Translation: "лечить, развлекать, рассматривать"
+},{
+    N: "",
+    Word: "treaty",
+    Translate: "договор, соглашение"
 },{
    N: 22,
    Word: "heathen",

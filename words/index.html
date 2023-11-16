@@ -5,80 +5,140 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Learn words</title>
 		<!-- Change href if need additional bootstrap href="style_bootstrap.css" -->
-		<link rel="stylesheet" type="text/css" href="style_bootstrap_pure.css">
+        <link rel="stylesheet" type="text/css" href="style_bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<script type="text/javascript" src="./data.js"></script>
+		<script type="text/javascript" src="./src/data_1.js"></script>
+		<script type="text/javascript" src="./src/data_2.js"></script>
+		<script type="text/javascript" src="./src/data_3.js"></script>
 	</head>
 	<body> 
 
 		<div id="container" class="container">
 			<h1 class="table">Learn Words</h1>
-		
+	
 		</div>
 
 		<script>
        
 	        // Get the container element where the table will be inserted
 	        let container = document.getElementById("container");
-	         
-	        // Create the table element
-	        let table = document.createElement("table");
-	        table.setAttribute('class', 'table table-bordered table-dark');
-	         
-	        // Get the keys (column names) of the first object in the JSON data
-	        let cols = Object.keys(jsonData[0]);
+            let jsonData = [data_1, data_2, data_3];
+            let activePageNumber = 1;
 
-	        let i = 1;
-	         
-	        // Create the header element
-	        let thead = document.createElement("thead");
-	        let tbody = document.createElement("tbody");
-	        let tr = document.createElement("tr");
-	         
-	        // Loop through the column names and create header cells
-	        cols.forEach((item) => {
-	            let th = document.createElement("th");
-	            th.setAttribute('scope', 'col');
-	            th.innerText = item; // Set the column name as the text of the header cell
-	            tr.appendChild(th); // Append the header cell to the header row
-	        });
+            function setTableContent(pageNumber) {
 
-	        thead.appendChild(tr); // Append the header row to the header
-	        table.append(thead) // Append the header to the table
+	            let table = document.createElement("table");
+	            table.setAttribute('class', 'table table-bordered table-dark');
 	         
-	         // Loop through the JSON data and create table rows
-	        jsonData.forEach((item) => {
+	            let thead = document.createElement("thead");
+	            let tbody = document.createElement("tbody");
 	            let tr = document.createElement("tr");
 	            
-	            // Get the values of the current object in the JSON data
-	            let vals = Object.values(item);
+                let th = document.createElement("th");
+	            th.setAttribute('scope', 'col');
+	            th.innerText = "№"; // Set the column name as the text of the header cell
+	            tr.appendChild(th); // Append the header cell to the header row
+                
+                th = document.createElement("th");
+	            th.setAttribute('scope', 'col');
+	            th.innerText = "Word"; // Set the column name as the text of the header cell
+	            tr.appendChild(th); // Append the header cell to the header ro
+	            
+                th = document.createElement("th");
+	            th.setAttribute('scope', 'col');
+	            th.innerText = "Translation"; // Set the column name as the text of the header cell
+	            tr.appendChild(th); // Append the header cell to the header ro
 
-	            let thr = document.createElement("th");
-	            thr.setAttribute('scope', 'row');
-	        	thr.innerText = vals[0]; // Set the value as the text of the table cell
-	        	tr.appendChild(thr); // Append the table cell to the table row
+	            thead.appendChild(tr); // Append the header row to the header
+	            table.append(thead) // Append the header to the table
+	         
 
+	            let i = 1;
+	             // Loop through the JSON data and create table rows
+                data = jsonData[pageNumber];
+	            data.forEach((item) => {
+	                let tr = document.createElement("tr");
+	            
+	                // Get the values of the current object in the JSON data
+	                let vals = Object.values(item);
 
-	        	let td1 = document.createElement("td");
-	        	td1.innerText = vals[1]; // Set the value as the text of the table cell
-	        	tr.appendChild(td1); // Append the table cell to the table row
+	                let thr = document.createElement("th");
+	                thr.setAttribute('scope', 'row');
+	        	    thr.innerText = vals[0]; // Set the value as the text of the table cell
+	        	    tr.appendChild(thr); // Append the table cell to the table row
 
-	        	let number = i++;
-	           	let td2 = document.createElement("td");
-	           	td2.setAttribute('class', 'hide_content');
-	           	td2.setAttribute('id', 'hide_' + number);
-	           	td2.setAttribute('onclick', 'showHide(' + number + ')');
-	        	td2.innerText = vals[2]; // Set the value as the text of the table cell
-	           	tr.appendChild(td2); // Append the table cell to the table row
+	        	    let td1 = document.createElement("td");
+	        	    td1.innerText = vals[1]; // Set the value as the text of the table cell
+	        	    tr.appendChild(td1); // Append the table cell to the table row
+
+	        	    let number = i++;
+	           	    let td2 = document.createElement("td");
+	           	    td2.setAttribute('class', 'hide_content');
+	           	    td2.setAttribute('id', 'hide_' + number);
+	           	    td2.setAttribute('onclick', 'showHide(' + number + ')');
+	        	    td2.innerText = vals[2]; // Set the value as the text of the table cell
+	           	    tr.appendChild(td2); // Append the table cell to the table row
 	 
-	            tbody.appendChild(tr);
-	            table.appendChild(tbody); // Append the table row to the table
-	        });
-	        
-	        container.appendChild(table) // Append the table to the container element
-	      	
-	      	function showHide(n) {
+	                tbody.appendChild(tr);
+	                table.appendChild(tbody); // Append the table row to the table
+	            });
+	            return table 
+            }
 
+            function setPagination() {
+                let nav = document.createElement("nav")
+                nav.setAttribute('aria-label', '...')
+                let ul = document.createElement("ul")
+                ul.setAttribute('class', 'pagination')
+                
+                let i = 0
+                jsonData.forEach(() => {
+                    let li = document.createElement("li")
+                    li.setAttribute('class', 'page-item')
+                    li.setAttribute('id', 'page_number_' + (i + 1))
+                    let a = document.createElement("a")
+                    a.setAttribute('class', 'page-link')
+                    a.setAttribute('href', '#')
+                    a.setAttribute('onclick', 'showPage(' + i + ')')
+                    a.innerText = i + 1;
+
+                    li.appendChild(a)
+                    ul.appendChild(li)
+                    i++
+                });
+                nav.appendChild(ul)
+                return nav
+            }
+
+            container.onload = (() => {
+                console.log('Loading....')
+                table = setTableContent(0)
+                paginate = setPagination()
+
+	            container.appendChild(paginate)
+                container.appendChild(table) // Append the table to the container element
+	            // container.appendChild(paginate)
+                setMarkAktivePage(1)
+            })()
+
+            function showPage(n) {
+                container.removeChild(table)
+                table = setTableContent(n)
+                container.appendChild(table)
+                
+                setMarkAktivePage(n + 1)
+            }
+
+            function setMarkAktivePage(n) {
+                let oldActivePage = document.getElementById("page_number_" + activePageNumber)
+                oldActivePage.classList.remove('active')
+                activePageNumber = n
+
+                let newActivePage = document.getElementById("page_number_" + n)
+                newActivePage.classList.add('active')
+            }
+	      	
+            function showHide(n) {
 	      		let element = document.getElementById('hide_' + n);
 	      		let classExist = element.classList.contains('hide_content');
 
@@ -87,8 +147,8 @@
 	      		} else {
 	      			element.classList.add('hide_content');
 	      		}
-	      		
 	      	}
+
 	   	</script>
 	</body>
 </html>
