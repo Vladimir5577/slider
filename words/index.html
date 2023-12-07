@@ -10,22 +10,27 @@
 		<script type="text/javascript" src="./src/data_1.js"></script>
 		<script type="text/javascript" src="./src/data_2.js"></script>
 		<script type="text/javascript" src="./src/data_3.js"></script>
+		<script type="text/javascript" src="./src/data_4.js"></script>
 	</head>
 	<body> 
 
 		<div id="container" class="container">
 			<h1 class="table">Learn Words</h1>
-	
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="input_field" placeholder="Search">
+  <button class="btn btn-light" type="button" onclick="clearSearchField()">X</button>
+</div>
 		</div>
 
 		<script>
        
 	        // Get the container element where the table will be inserted
 	        let container = document.getElementById("container");
-            let jsonData = [data_1, data_2, data_3];
+            let jsonData = [data_1, data_2, data_3, data_4];
+            let nav = document.createElement("nav")
             let activePageNumber = 1;
 
-            function setTableContent(pageNumber) {
+            function setTableContent(tableData) {
 
 	            let table = document.createElement("table");
 	            table.setAttribute('class', 'table table-bordered table-dark');
@@ -54,9 +59,9 @@
 	         
 
 	            let i = 1;
-	             // Loop through the JSON data and create table rows
-                data = jsonData[pageNumber];
-	            data.forEach((item) => {
+	            // Loop through the JSON data and create table rows
+                // data = jsonData[pageNumber];
+	            tableData.forEach((item) => {
 	                let tr = document.createElement("tr");
 	            
 	                // Get the values of the current object in the JSON data
@@ -86,7 +91,6 @@
             }
 
             function setPagination() {
-                let nav = document.createElement("nav")
                 nav.setAttribute('aria-label', '...')
                 let ul = document.createElement("ul")
                 ul.setAttribute('class', 'pagination')
@@ -112,7 +116,7 @@
 
             container.onload = (() => {
                 console.log('Loading....')
-                table = setTableContent(0)
+                table = setTableContent(data_1)
                 paginate = setPagination()
 
 	            container.appendChild(paginate)
@@ -123,7 +127,8 @@
 
             function showPage(n) {
                 container.removeChild(table)
-                table = setTableContent(n)
+                let tablePageData = jsonData[n];
+                table = setTableContent(tablePageData)
                 container.appendChild(table)
                 
                 setMarkAktivePage(n + 1)
@@ -147,7 +152,52 @@
 	      		} else {
 	      			element.classList.add('hide_content');
 	      		}
-	      	}
+	      	} 
+            
+            // search 
+            let inputField = document.getElementById("input_field")
+            inputField.oninput = () => {
+                console.log(inputField.value)
+                if (container.contains(table)) {
+                    container.removeChild(table)
+                } else {
+
+                }
+
+                if (container.contains(nav)) {
+                    container.removeChild(nav);
+                }
+
+                let searchData = [];
+                if (inputField.value.length > 0) {
+                    searchString = inputField.value.toLowerCase();
+                    jsonData.forEach((dataArray) => {
+                        dataArray.forEach((item) => {
+                            let vals = Object.values(item);
+                            if (vals[1].startsWith(searchString)) {
+                                searchData.push(item);
+                            }
+                        });   
+                    });
+                } else {
+                    if (!container.contains(nav)) {
+                        container.appendChild(nav);
+                    }
+                    searchData = jsonData[activePageNumber - 1];
+                }
+
+                table = setTableContent(searchData);
+                container.appendChild(table) // Append the table to the container element
+            }
+    
+            function clearSearchField() {
+                container.appendChild(nav);
+                container.removeChild(table);
+                inputField.value = "";
+                table = setTableContent(jsonData[activePageNumber - 1]);
+                container.appendChild(table);
+            }
+            
 
 	   	</script>
 	</body>
